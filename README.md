@@ -20,3 +20,7 @@ Date created: 05.02.2014
 ![Correlation](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_24_1.png)
 
 ![Risk/Return Matrix](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_28_0.png)
+
+## PDF Convert
+
+`ipython nbconvert analyseFXXP.EX.ipynb --to latex --post PDF --SphinxTransformer.author='Paul Balzer'`
