@@ -93,9 +93,10 @@ RolUp = pd.rolling_mean( dUp, n )
 RolDown = pd.rolling_mean( dDown, n).abs()
 
 RS = RolUp / RolDown
+RSI = 100. - 100./(1.+RS)
 
 plt.figure(figsize=(16,4))
-RS.plot();
+RSI.plot();
 plt.axhline(30, color='k', alpha=0.2)
 plt.annotate('oversold',xy=(0.5, 0.3), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
 plt.axhline(70, color='k', alpha=0.2)

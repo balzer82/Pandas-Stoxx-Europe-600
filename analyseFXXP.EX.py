@@ -88,14 +88,19 @@ dUp, dDown = delta.copy( ), delta.copy( )
 dUp[ dUp < 0 ] = 0
 dDown[ dDown > 0 ] = 0
 
-
 n=14
 RolUp = pd.rolling_mean( dUp, n )
 RolDown = pd.rolling_mean( dDown, n).abs()
 
 RS = RolUp / RolDown
+RSI = 100. - 100./(1.+RS)
 
-RS.plot();
+plt.figure(figsize=(16,4))
+RSI.plot();
+plt.axhline(30, color='k', alpha=0.2)
+plt.annotate('oversold',xy=(0.5, 0.3), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
+plt.axhline(70, color='k', alpha=0.2)
+plt.annotate('overbought',xy=(0.5, 0.8), xycoords='figure fraction', fontsize=20, alpha=0.4,ha='center')
 plt.title('RSI %s (%i days)' % (sc, n));
 plt.ylim([0,100]);
 plt.ylabel('%');
