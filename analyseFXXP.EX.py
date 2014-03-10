@@ -148,7 +148,7 @@ print('Call Value %8.3f' % VO)
 
 # <codecell>
 
-df = pd.io.data.get_data_yahoo(['AAPL', 'FXXP.EX', 'GOOG', 'FDAX.EX'], 
+df = pd.io.data.get_data_yahoo(['AAPL', 'FXXP.EX', 'GOOG', 'FDAX.EX', 'TSLA'], 
                                start=datetime.datetime(2013, 1, 1))['Adj Close']
 df.head()
 
@@ -184,7 +184,7 @@ plt.yticks(range(len(corr)), corr.columns);
 # <codecell>
 
 fig=plt.figure(figsize=(12,12))
-plt.scatter(rets.mean(), rets.std())
+plt.scatter(rets.mean(), rets.std(), s=50)
 plt.xlabel('Expected returns')
 plt.ylabel('Risk')
 for label, x, y in zip(rets.columns, rets.mean(), rets.std()):
@@ -192,6 +192,10 @@ for label, x, y in zip(rets.columns, rets.mean(), rets.std()):
         label, 
         xy = (x, y), xytext = (20, -20),
         textcoords = 'offset points', ha = 'right', va = 'bottom',
-        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),
+        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'w', alpha = 0.5),
         arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+
+# <markdowncell>
+
+# ![Elon Musk](http://a.abcnews.com/images/Technology/gty_elon_musk_tesla_ll_130918_16x9_992.jpg)
 
