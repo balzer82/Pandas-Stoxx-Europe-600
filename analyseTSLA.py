@@ -19,9 +19,9 @@ import numpy as np
 
 %pylab inline
 
-# <headingcell level=2>
+# <headingcell level=1>
 
-# Stoxx-Europe-600-Index
+# TESLA Motors
 
 # <markdowncell>
 
@@ -30,7 +30,7 @@ import numpy as np
 
 # <codecell>
 
-sc='FXXP.EX'
+sc='TSLA'
 stoxx = pd.io.data.get_data_yahoo(sc, 
                                  start=datetime.datetime(2013, 1, 1))
 stoxx.head(10)
@@ -194,4 +194,8 @@ for label, x, y in zip(rets.columns, rets.mean(), rets.std()):
         textcoords = 'offset points', ha = 'right', va = 'bottom',
         bbox = dict(boxstyle = 'round,pad=0.5', fc = 'w', alpha = 0.5),
         arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+
+# <markdowncell>
+
+# ![Elon Musk](http://a.abcnews.com/images/Technology/gty_elon_musk_tesla_ll_130918_16x9_992.jpg)
 
