@@ -41,6 +41,7 @@ stoxx.head(10)
 
 # <codecell>
 
+plt.figure(figsize=(16,4))
 stoxx['Close'].plot();
 plt.ylabel('\$')
 plt.title('Closing Price %s' % sc);
@@ -51,16 +52,17 @@ plt.title('Closing Price %s' % sc);
 
 # <headingcell level=3>
 
-# Moving Average
+# Exponentially Weighted Moving Average
 
 # <codecell>
 
 close_px = stoxx['Adj Close']
 mad = 10
-mavg = pd.rolling_mean(close_px, mad)
+mavg = pd.ewma(close_px, mad)
+plt.figure(figsize=(16,4))
 mavg.plot();
 plt.ylabel('\$')
-plt.title('Moving Average (%i Days) %s' % (mad, sc));
+plt.title('Exponentially Weighted Moving Average (%i Days) %s' % (mad, sc));
 
 # <headingcell level=3>
 
@@ -69,6 +71,7 @@ plt.title('Moving Average (%i Days) %s' % (mad, sc));
 # <codecell>
 
 stoxx['rets'] = close_px.pct_change()
+plt.figure(figsize=(16,4))
 stoxx.rets.plot();
 plt.title('Returns %s' % sc);
 plt.ylabel('\$');
@@ -79,18 +82,22 @@ plt.ylabel('\$');
 
 # <markdowncell>
 
-# Source: http://stackoverflow.com/a/20527056
+# Source: http://stackoverflow.com/a/20527056 (with Error!!)
+# 
+# The RSI is not calcualted with the `rolling_mean` but with the exponentially weighted moving average `ewma`!
 
 # <codecell>
 
+# Get daily up or down
 delta = stoxx['Close'].diff()
+
 dUp, dDown = delta.copy( ), delta.copy( )
 dUp[ dUp < 0 ] = 0
 dDown[ dDown > 0 ] = 0
 
 n=14
-RolUp = pd.rolling_mean( dUp, n )
-RolDown = pd.rolling_mean( dDown, n).abs()
+RolUp = pd.ewma( dUp, n)
+RolDown = pd.ewma( dDown, n).abs()
 
 RS = RolUp / RolDown
 RSI = 100. - 100./(1.+RS)
@@ -104,6 +111,10 @@ plt.annotate('overbought',xy=(0.5, 0.8), xycoords='figure fraction', fontsize=20
 plt.title('RSI %s (%i days)' % (sc, n));
 plt.ylim([0,100]);
 plt.ylabel('%');
+
+# <codecell>
+
+print('TSLA RSI (%s): %d%%' % (stoxx.index[-1], RSI.values[-1]))
 
 # <headingcell level=3>
 
