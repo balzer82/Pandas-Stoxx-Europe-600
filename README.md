@@ -3,28 +3,25 @@ Pandas Financial Analyse Stuff
 
 Some Financial Analysis Stuff with Python Pandas
 
-### Best Viewed via [IPython Notebook Viewer](http://nbviewer.ipython.org/github/balzer82/Pandas-Stoxx-Europe-600/blob/master/analyseFXXP.EX.ipynb) or take a look at the [PDF](https://github.com/balzer82/Pandas-Stoxx-Europe-600/blob/master/analyseFXXP.EX.pdf?raw=true).
+### Best Viewed via [IPython Notebook Viewer](http://nbviewer.ipython.org/github/balzer82/Pandas-Stoxx-Europe-600/blob/master/analyseFXXP.EX.ipynb)
 
-### [Tesla Motors Analyse](http://nbviewer.ipython.org/github/balzer82/Pandas-Stoxx-Europe-600/blob/master/analyseTSLA.ipynb)
+## [Tesla Motors Analyse](http://nbviewer.ipython.org/github/balzer82/Pandas-Stoxx-Europe-600/blob/master/analyseTSLA.ipynb)
 
-Date created: 10.03.2014
+Date created: 10.04.2014
 
+### Some Charts
 
+![Closing Price](https://raw.githubusercontent.com/balzer82/Pandas-Stoxx-Europe-600/master/Closing-Price-TSLA.png)
 
-## Some Charts
+![RSI](https://raw.githubusercontent.com/balzer82/Pandas-Stoxx-Europe-600/master/RSI-TSLA.png)
 
-![Closing Price](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_6_0.png)
+![Monte Carlo Simulation](https://raw.githubusercontent.com/balzer82/Pandas-Stoxx-Europe-600/master/Monte-Carlo-Simulation-TSLA.png)
 
-![Returns](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_11_0.png)
+![Correlation](https://raw.githubusercontent.com/balzer82/Pandas-Stoxx-Europe-600/master/Return-Correlation-FXXP.png)
 
-![RSI](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_14_0.png)
+![Risk/Return Matrix](https://raw.githubusercontent.com/balzer82/Pandas-Stoxx-Europe-600/master/Risk-Return-FXXP.png)
 
-![Monte Carlo Simulation](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_17_0.png)
-
-![Correlation](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_24_1.png)
-
-![Risk/Return Matrix](https://raw.github.com/balzer82/Pandas-Stoxx-Europe-600/master/analyseFXXP.EX_files/analyseFXXP.EX_28_0.png)
 
 ## PDF Convert
 
-`ipython nbconvert analyseFXXP.EX.ipynb --to latex --post PDF --SphinxTransformer.author='Paul Balzer'`
+`ipython nbconvert analyseFXXP.EX.ipynb --to latex --post PDF --SphinxTransformer.author='Your Name'`
