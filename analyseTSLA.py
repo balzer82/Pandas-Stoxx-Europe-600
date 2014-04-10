@@ -49,6 +49,7 @@ plt.figure(figsize=(16,4))
 stoxx['Close'].plot();
 plt.ylabel('\$')
 plt.title('Closing Price %s' % sc);
+plt.savefig('Closing-Price-TSLA.png',bbox_inches='tight', dpi=150)
 
 # <headingcell level=2>
 
@@ -98,7 +99,7 @@ RolDown = pd.rolling_mean( dDown, n).abs()
 RS = RolUp / RolDown
 RSI = 100. - 100./(1.+RS)
 
-plt.figure(figsize=(16,4))
+plt.figure(figsize=(9,3))
 RSI.plot();
 plt.axhline(20, color='k', alpha=0.2)
 plt.annotate('oversold',xy=(0.5, 0.25), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
@@ -107,6 +108,7 @@ plt.annotate('overbought',xy=(0.5, 0.82), xycoords='figure fraction', fontsize=2
 plt.title('RSI %s (%i days)' % (sc, n));
 plt.ylim([0,100]);
 plt.ylabel('%');
+plt.savefig('RSI-TSLA.png',bbox_inches='tight', dpi=150)
 
 # <codecell>
 
@@ -174,6 +176,7 @@ ax=MC.plot(alpha=0.2, color='k');
 stoxx['Close'].plot(ax=ax);
 plt.legend(['Monte Carlo Simulation']);
 plt.ylabel('\$');
+plt.savefig('Monte-Carlo-Simulation-TSLA.png',bbox_inches='tight', dpi=150)
 
 # <codecell>
 

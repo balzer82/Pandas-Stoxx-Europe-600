@@ -41,10 +41,11 @@ stoxx.head(10)
 
 # <codecell>
 
-plt.figure(figsize=(16,4))
+plt.figure(figsize=(9,3))
 stoxx['Close'].plot();
 plt.ylabel('\$')
 plt.title('Closing Price %s' % sc);
+plt.savefig('Closing-Price-FXXP.png',bbox_inches='tight', dpi=150)
 
 # <headingcell level=2>
 
@@ -102,7 +103,7 @@ RolDown = pd.ewma( dDown, n).abs()
 RS = RolUp / RolDown
 RSI = 100. - 100./(1.+RS)
 
-plt.figure(figsize=(16,4))
+plt.figure(figsize=(9,3))
 RSI.plot();
 plt.axhline(20, color='k', alpha=0.2)
 plt.annotate('oversold',xy=(0.5, 0.3), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
@@ -111,6 +112,7 @@ plt.annotate('overbought',xy=(0.5, 0.8), xycoords='figure fraction', fontsize=20
 plt.title('RSI %s (%i days)' % (sc, n));
 plt.ylim([0,100]);
 plt.ylabel('%');
+plt.savefig('RSI-FXXP.png',bbox_inches='tight', dpi=150)
 
 # <headingcell level=3>
 
@@ -144,6 +146,7 @@ ax=MC.plot(alpha=0.2, color='k');
 stoxx['Close'].plot(ax=ax);
 plt.legend(['Monte Carlo Simulation']);
 plt.ylabel('\$');
+plt.savefig('Monte-Carlo-Simulation-FXXP.png',bbox_inches='tight', dpi=150)
 
 # <headingcell level=3>
 
@@ -174,8 +177,9 @@ rets = df.pct_change()
 
 # <codecell>
 
-fig=plt.figure(figsize=(12,12));
+fig=plt.figure(figsize=(6,6));
 pd.scatter_matrix(rets, diagonal='kde', figsize=(10, 10));
+plt.savefig('Return-Correlation-FXXP.png',bbox_inches='tight', dpi=150)
 
 # <headingcell level=3>
 
@@ -195,7 +199,7 @@ plt.yticks(range(len(corr)), corr.columns);
 
 # <codecell>
 
-fig=plt.figure(figsize=(12,12))
+fig=plt.figure(figsize=(6,6))
 plt.scatter(rets.mean(), rets.std(), s=50)
 plt.xlabel('Expected returns')
 plt.ylabel('Risk')
@@ -206,4 +210,13 @@ for label, x, y in zip(rets.columns, rets.mean(), rets.std()):
         textcoords = 'offset points', ha = 'right', va = 'bottom',
         bbox = dict(boxstyle = 'round,pad=0.5', fc = 'w', alpha = 0.5),
         arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+    
+plt.savefig('Risk-Return-FXXP.png',bbox_inches='tight', dpi=150)
+
+# <codecell>
+
+print('Done.')
+
+# <codecell>
+
 
