@@ -35,6 +35,10 @@ stoxx = pd.io.data.get_data_yahoo(sc,
                                  start=datetime.datetime(2013, 1, 1))
 stoxx.head(10)
 
+# <codecell>
+
+print('Date: %s' % stoxx.index[-1])
+
 # <headingcell level=2>
 
 # Schlusspreis
@@ -66,25 +70,17 @@ plt.title('Exponentially Weighted Moving Average (%i Days) %s' % (mad, sc));
 
 # <headingcell level=3>
 
-# Returns
-
-# <codecell>
-
-stoxx['rets'] = close_px.pct_change()
-plt.figure(figsize=(16,4))
-stoxx.rets.plot();
-plt.title('Returns %s' % sc);
-plt.ylabel('\$');
-
-# <headingcell level=3>
-
 # Relative Strength Index
 
 # <markdowncell>
 
-# Source: http://stackoverflow.com/a/20527056 (with Error!!)
+# The relative strength index (RSI) is a technical indicator used in the analysis of financial markets. It is intended to chart the current and historical strength or weakness of a stock or market based on the closing prices of a recent trading period. The indicator should not be confused with relative strength. - [Wikipedia](http://en.wikipedia.org/wiki/Relative_strength_index)
+
+# <markdowncell>
+
+# Source: http://stackoverflow.com/a/20527056
 # 
-# The RSI is not calcualted with the `rolling_mean` but with the exponentially weighted moving average `ewma`!
+# Commonly, the RSI is not calcualted with the `rolling_mean` but with the exponentially weighted moving average `ewma`!
 
 # <codecell>
 
@@ -96,18 +92,18 @@ dUp[ dUp < 0 ] = 0
 dDown[ dDown > 0 ] = 0
 
 n=14
-RolUp = pd.ewma( dUp, n)
-RolDown = pd.ewma( dDown, n).abs()
+RolUp = pd.rolling_mean( dUp, n)
+RolDown = pd.rolling_mean( dDown, n).abs()
 
 RS = RolUp / RolDown
 RSI = 100. - 100./(1.+RS)
 
 plt.figure(figsize=(16,4))
 RSI.plot();
-plt.axhline(30, color='k', alpha=0.2)
-plt.annotate('oversold',xy=(0.5, 0.3), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
-plt.axhline(70, color='k', alpha=0.2)
-plt.annotate('overbought',xy=(0.5, 0.8), xycoords='figure fraction', fontsize=20, alpha=0.4,ha='center')
+plt.axhline(20, color='k', alpha=0.2)
+plt.annotate('oversold',xy=(0.5, 0.25), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
+plt.axhline(80, color='k', alpha=0.2)
+plt.annotate('overbought',xy=(0.5, 0.82), xycoords='figure fraction', fontsize=20, alpha=0.4,ha='center')
 plt.title('RSI %s (%i days)' % (sc, n));
 plt.ylim([0,100]);
 plt.ylabel('%');
@@ -116,9 +112,39 @@ plt.ylabel('%');
 
 print('TSLA RSI (%s): %d%%' % (stoxx.index[-1], RSI.values[-1]))
 
+# <headingcell level=1>
+
+# Load other Stock Values
+
+# <codecell>
+
+df = pd.io.data.get_data_yahoo(['AAPL', 'FXXP.EX', 'GOOG', 'FDAX.EX', 'TSLA'], 
+                               start=datetime.datetime(2013, 1, 1))['Adj Close']
+df.head()
+
+# <headingcell level=3>
+
+# Returns
+
+# <codecell>
+
+rets = df.pct_change()
+
+# <codecell>
+
+stoxx['rets'] = close_px.pct_change()
+plt.figure(figsize=(16,4))
+stoxx.rets.plot();
+plt.title('Returns %s' % sc);
+plt.ylabel('\$');
+
 # <headingcell level=3>
 
 # Monte Carlo Simulation
+
+# <markdowncell>
+
+# Monte Carlo methods are used in finance and mathematical finance to value and analyze (complex) instruments, portfolios and investments by simulating the various sources of uncertainty affecting their value, and then determining their average value over the range of resultant outcomes. - [Wikipedia](http://en.wikipedia.org/wiki/Monte_Carlo_methods_in_finance)
 
 # <codecell>
 
@@ -149,6 +175,9 @@ stoxx['Close'].plot(ax=ax);
 plt.legend(['Monte Carlo Simulation']);
 plt.ylabel('\$');
 
+# <codecell>
+
+
 # <headingcell level=3>
 
 # Option Valuation
@@ -161,20 +190,6 @@ print('Call Value %8.3f' % VO)
 # <headingcell level=1>
 
 # Vergleich
-
-# <codecell>
-
-df = pd.io.data.get_data_yahoo(['AAPL', 'FXXP.EX', 'GOOG', 'FDAX.EX', 'TSLA'], 
-                               start=datetime.datetime(2013, 1, 1))['Adj Close']
-df.head()
-
-# <headingcell level=3>
-
-# Returns
-
-# <codecell>
-
-rets = df.pct_change()
 
 # <codecell>
 
