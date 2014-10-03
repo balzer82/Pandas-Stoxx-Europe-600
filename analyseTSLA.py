@@ -71,6 +71,7 @@ stoxx['Close'].plot(alpha=0.3);
 plt.ylabel('\$')
 plt.title('Exponentially Weighted Moving Averages %s' % (sc));
 plt.legend(loc=2)
+plt.savefig('Closing-Price-TSLA-EWMA.png',bbox_inches='tight', dpi=150)
 
 # <headingcell level=3>
 
@@ -180,7 +181,8 @@ ax=MC.plot(alpha=0.2, color='k');
 
 stoxx['Close'].plot(ax=ax);
 plt.legend(['Monte Carlo Simulation'], loc='upper left');
-plt.ylabel('\$');
+plt.ylabel('Closing Price \$');
+plt.title('Possible Future of TSLA (Tesla Motors Stock)')
 plt.savefig('Monte-Carlo-Simulation-TSLA.png',bbox_inches='tight', dpi=150)
 
 # <codecell>
