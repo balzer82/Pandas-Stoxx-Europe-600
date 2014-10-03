@@ -32,7 +32,7 @@ import numpy as np
 
 sc='TSLA'
 stoxx = pd.io.data.get_data_yahoo(sc, 
-                                 start=datetime.datetime(2013, 1, 1))
+                                 start=datetime.datetime(2014, 1, 1))
 stoxx.head(10)
 
 # <codecell>
@@ -62,12 +62,15 @@ plt.savefig('Closing-Price-TSLA.png',bbox_inches='tight', dpi=150)
 # <codecell>
 
 close_px = stoxx['Adj Close']
-mad = 10
-mavg = pd.ewma(close_px, mad)
+mavg10 = pd.ewma(close_px, 10)
+mavg30 = pd.ewma(close_px, 30)
 plt.figure(figsize=(16,4))
-mavg.plot();
+mavg10.plot(label='10days mavg');
+mavg30.plot(label='30days mavg');
+stoxx['Close'].plot(alpha=0.3);
 plt.ylabel('\$')
-plt.title('Exponentially Weighted Moving Average (%i Days) %s' % (mad, sc));
+plt.title('Exponentially Weighted Moving Averages %s' % (sc));
+plt.legend(loc=2)
 
 # <headingcell level=3>
 
@@ -102,7 +105,7 @@ RSI = 100. - 100./(1.+RS)
 plt.figure(figsize=(9,3))
 RSI.plot();
 plt.axhline(20, color='k', alpha=0.2)
-plt.annotate('oversold',xy=(0.5, 0.25), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
+plt.annotate('oversold',xy=(0.5, 0.28), xycoords='figure fraction', fontsize=20, alpha=0.4, ha='center')
 plt.axhline(80, color='k', alpha=0.2)
 plt.annotate('overbought',xy=(0.5, 0.82), xycoords='figure fraction', fontsize=20, alpha=0.4,ha='center')
 plt.title('RSI %s (%i days)' % (sc, n));
@@ -171,10 +174,12 @@ for t in range(1, M+1):
 
 
 MC=pd.DataFrame(data=S, index=pd.date_range(start=stoxx.index[-1], periods=M+1))
+MCmean = pd.DataFrame(data=S, index=pd.date_range(start=stoxx.index[-1], periods=M+1)).mean()
 
 ax=MC.plot(alpha=0.2, color='k');
+
 stoxx['Close'].plot(ax=ax);
-plt.legend(['Monte Carlo Simulation']);
+plt.legend(['Monte Carlo Simulation'], loc='upper left');
 plt.ylabel('\$');
 plt.savefig('Monte-Carlo-Simulation-TSLA.png',bbox_inches='tight', dpi=150)
 
